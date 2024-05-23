@@ -25,9 +25,6 @@ class TaskManagerApp(tk.Tk):
         self.terminate_button = tk.Button(self, text="Terminate Process", command=self.terminate_process)
         self.terminate_button.pack(pady=10)
 
-        # Create a create process button
-        self.create_button = tk.Button(self, text="Create Process", command=self.create_process)
-        self.create_button.pack(pady=10)
 
     def sort_by_column(self, col, reverse):
         l = [(self.tree.set(k, col), k) for k in self.tree.get_children('')]
@@ -72,15 +69,6 @@ class TaskManagerApp(tk.Tk):
         except psutil.TimeoutExpired:
             messagebox.showerror("Error", "Timeout expired while terminating process")
 
-    def create_process(self):
-        file_path = filedialog.askopenfilename(title="Select Script or Executable")
-        if file_path:
-            try:
-                subprocess.Popen([file_path])
-                messagebox.showinfo("Success", f"Process {file_path} started successfully")
-                self.update_process_list()
-            except Exception as e:
-                messagebox.showerror("Error", f"Failed to start process: {e}")
 
 
 if __name__ == "__main__":

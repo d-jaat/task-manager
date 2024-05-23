@@ -69,6 +69,7 @@ class TaskManagerApp(tk.Tk):
         self.create_button = tk.Button(self.processes_frame, text="Create Process", command=self.create_process)
         self.create_button.pack(pady=10)
 
+    # noinspection PyTypeChecker
     def create_performance_tab(self):
         self.fig, (self.ax_cpu, self.ax_memory) = plt.subplots(2, 1, figsize=(8, 6))
         self.fig.tight_layout(pad=3.0)
@@ -225,4 +226,3 @@ class TaskManagerApp(tk.Tk):
 if __name__ == "__main__":
     app = TaskManagerApp()
     app.mainloop()
-

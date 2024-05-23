@@ -4,7 +4,6 @@ import psutil
 import subprocess
 import threading
 import queue
-import time
 
 
 class TaskManagerApp(tk.Tk):

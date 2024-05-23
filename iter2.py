@@ -7,6 +7,10 @@ import subprocess
 class TaskManagerApp(tk.Tk):
     def __init__(self):
         super().__init__()
+        self.create_button = tk.Button(self, text="Create Process", command=self.create_process)
+        self.terminate_button = tk.Button(self, text="Terminate Process", command=self.terminate_process)
+        self.tree = None
+        self.search_var = tk.StringVar()
         self.title("Self Made Task Manager")
         self.geometry("800x600")
         self.create_widgets()
@@ -18,7 +22,6 @@ class TaskManagerApp(tk.Tk):
         search_frame.pack(pady=10)
 
         tk.Label(search_frame, text="Search:").pack(side=tk.LEFT, padx=5)
-        self.search_var = tk.StringVar()
         search_entry = tk.Entry(search_frame, textvariable=self.search_var)
         search_entry.pack(side=tk.LEFT, padx=5)
 
@@ -37,11 +40,9 @@ class TaskManagerApp(tk.Tk):
         self.tree.pack(fill=tk.BOTH, expand=True)
 
         # Create a terminate button
-        self.terminate_button = tk.Button(self, text="Terminate Process", command=self.terminate_process)
         self.terminate_button.pack(pady=10)
 
         # Create a create process button
-        self.create_button = tk.Button(self, text="Create Process", command=self.create_process)
         self.create_button.pack(pady=10)
 
     def sort_by_column(self, col, reverse):

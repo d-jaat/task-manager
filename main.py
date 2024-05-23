@@ -20,9 +20,7 @@ class TaskManagerApp(tk.Tk):
             self.tree.heading(col, text=col.capitalize(), command=lambda c=col: self.sort_by_column(c, False))
         self.tree.pack(fill=tk.BOTH, expand=True)
 
-        # Create a terminate button
-        self.terminate_button = tk.Button(self, text="Terminate Process", command=self.terminate_process)
-        self.terminate_button.pack(pady=10)
+
 
     def sort_by_column(self, col, reverse):
         l = [(self.tree.set(k, col), k) for k in self.tree.get_children('')]
@@ -47,25 +45,6 @@ class TaskManagerApp(tk.Tk):
 
         self.after(1000, self.update_process_list)
 
-    def terminate_process(self):
-        selected_item = self.tree.selection()
-        if not selected_item:
-            messagebox.showwarning("Warning", "Please select a process to terminate")
-            return
-
-        pid = self.tree.item(selected_item[0], 'values')[0]
-        try:
-            p = psutil.Process(int(pid))
-            p.terminate()
-            p.wait(timeout=3)
-            messagebox.showinfo("Success", f"Process {pid} terminated successfully")
-            self.update_process_list()
-        except psutil.NoSuchProcess:
-            messagebox.showerror("Error", "No such process found")
-        except psutil.AccessDenied:
-            messagebox.showerror("Error", "Access denied")
-        except psutil.TimeoutExpired:
-            messagebox.showerror("Error", "Timeout expired while terminating process")
 
 
 if __name__ == "__main__":
